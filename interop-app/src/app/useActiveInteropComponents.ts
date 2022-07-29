@@ -16,7 +16,7 @@ function nextComponentKeyFactory() {
 const nextComponentKey = nextComponentKeyFactory();
 const updateSubject = new Subject<boolean>();
 
-export function registerInteropComponent(
+export function registerActiveInteropComponent(
   children: React.ReactNode,
   element: HTMLElement
 ) {

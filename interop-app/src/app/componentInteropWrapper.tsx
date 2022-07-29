@@ -1,4 +1,4 @@
-import { registerInteropComponent } from "./useActiveInteropComponents";
+import { registerActiveInteropComponent } from "./useActiveInteropComponents";
 
 const noop = () => {};
 
@@ -22,7 +22,7 @@ export function registerInteropCustomElement(
       console.log(`Mounting ${tagName} component (${this.id}).`);
       const mountPoint = document.createElement("div");
       this.appendChild(mountPoint);
-      this.deregisterFromActiveInterop = registerInteropComponent(
+      this.deregisterFromActiveInterop = registerActiveInteropComponent(
         <Component />,
         mountPoint
       );
