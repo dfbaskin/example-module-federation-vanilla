@@ -12,6 +12,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "5.5.0",
+    "npm-run-all": "^4.1.5",
     "serve": "14.0.1",
     "typescript": "4.7.4",
     "webpack": "5.74.0",
@@ -19,10 +20,15 @@
     "webpack-dev-server": "4.9.3"
   },
   "scripts": {
-    "start": "webpack-cli serve",
-    "build": "webpack --mode production",
-    "serve": "serve dist -p 3002",
-    "clean": "rm -rf dist"
+    "start": "npm-run-all -p start:*",
+    "start:host": "webpack-cli serve --config host-app/webpack-config.js",
+    "start:interop": "webpack-cli serve --config interop-app/webpack-config.js",
+    "build": "npm-run-all build:*",
+    "build:host": "webpack --mode production --config host-app/webpack-config.js",
+    "build:interop": "webpack --mode production --config interop-app/webpack-config.js",
+    "build-dev": "npm-run-all build-dev:*",
+    "build-dev:host": "webpack --config host-app/webpack-config.js",
+    "build-dev:interop": "webpack --config interop-app/webpack-config.js"
   },
   "dependencies": {
     "immer": "^9.0.15",
