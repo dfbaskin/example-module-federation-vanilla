@@ -1,0 +1,24 @@
+.app-root {
+  margin: 4rem;
+}
+
+.app-root > h1 {
+  border-bottom: 1px solid #ccc;
+}
+.app-root > div {
+  margin-top: 2rem;
+}
+
+.app-root > div:nth-of-type(1) fieldset {
+  width: 20rem;
+}
+
+.app-root > div:nth-of-type(2) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.app-root > div:nth-of-type(2) > div {
+  min-width: 4rem;
+  min-height: 4rem;
+}
