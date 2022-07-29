@@ -1,4 +1,4 @@
-import './app.element.css';
+import "./app.element.css";
 
 export class AppElement extends HTMLElement {
   public static observedAttributes = [];
@@ -8,33 +8,17 @@ export class AppElement extends HTMLElement {
   }
 
   connectedCallback() {
-    const title = 'webapp';
+    const title = "webapp";
     this.innerHTML = `
     <div class="app-root">
       <h1>Web Application / React Port Interop Example</h1>
       <div>
         <fieldset>
-          <legend>Add Component</legend>
-          <div>
-            <label>
-              <input type="radio" name="componentType" value="red" checked>
-              <span>Red</span>
-            </label>
-          </div>
-          <div>
-            <label>
-              <input type="radio" name="componentType" value="blue">
-              <span>Blue</span>
-            </label>
-          </div>
-          <div>
-            <label>
-              <input type="radio" name="componentType" value="green">
-              <span>Green</span>
-            </label>
-          </div>
-          <div>
-            <button id="add-component-button" type="button">Add</button>
+          <legend>Add Components</legend>
+          <div id="add-buttons">
+            <button type="button" name="red">Add Red</button>
+            <button type="button" name="blue">Add Blue</button>
+            <button type="button" name="green">Add Green</button>
           </div>
         </fieldset>
       </div>
@@ -42,27 +26,25 @@ export class AppElement extends HTMLElement {
     </div>
       `;
 
-    this.addComponentButton.addEventListener('click', this.addElement);
+    this.addButtons.addEventListener("click", this.addElement);
   }
 
   disconnectedCallback() {
-    this.addComponentButton.removeEventListener('click', this.addElement);
+    this.addButtons.removeEventListener("click", this.addElement);
   }
 
   get componentTypeRadioButtons() {
     return Array.from(
-      this.querySelectorAll('input[type=radio]')
+      this.querySelectorAll("input[type=radio]")
     ) as HTMLInputElement[];
   }
 
-  get addComponentButton() {
-    return this.querySelector('#add-component-button') as HTMLButtonElement;
+  get addButtons() {
+    return this.querySelector("#add-buttons") as HTMLDivElement;
   }
 
-  addElement = () => {
-    const componentType = this.componentTypeRadioButtons.find(
-      (c) => c.checked
-    )?.value;
+  addElement = (evt: MouseEvent) => {
+    const componentType = (evt.target as HTMLButtonElement | undefined)?.name;
     if (componentType) {
       const component = document.createElement(`custom-${componentType}`);
       this.querySelector("#components-list")?.appendChild(component);
@@ -70,4 +52,4 @@ export class AppElement extends HTMLElement {
   };
 }
 
-customElements.define('web-app-root', AppElement);
+customElements.define("web-app-root", AppElement);
