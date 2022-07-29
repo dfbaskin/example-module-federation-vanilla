@@ -1,6 +1,8 @@
 .custom-red {
   width: auto;
-  min-width: 10rem;
+  color: white;
+  min-width: 16rem;
   min-height: 6rem;
   background-color: red;
+  padding: 1rem;
 }

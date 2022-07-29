@@ -1,7 +1,9 @@
 .custom-green {
   width: auto;
+  color: white;
   text-align: center;
-  min-width: 10rem;
+  min-width: 16rem;
   min-height: 6rem;
   background-color: green;
+  padding: 1rem;
 }
