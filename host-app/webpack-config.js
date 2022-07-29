@@ -4,7 +4,7 @@ const ModuleFederationPlugin =
 const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
-const deps = require('../package.json').dependencies;
+const deps = require("../package.json").dependencies;
 
 const outputPath = path.join(__dirname, "../dist/host-app");
 
@@ -44,13 +44,7 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "host-app",
       remotes: {
-        app2: "interop-app@http://localhost:4201/remoteEntry.js",
-      },
-      shared: {
-        react: {
-          requiredVersion: deps.react,
-          singleton: true,
-        }
+        interop_app: "interop_app@http://localhost:4201/remoteEntry.js",
       },
     }),
     new HtmlWebpackPlugin({

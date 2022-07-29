@@ -4,7 +4,7 @@ const ModuleFederationPlugin =
 const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
-const deps = require('../package.json').dependencies;
+const deps = require("../package.json").dependencies;
 
 const outputPath = path.join(__dirname, "../dist/interop-app");
 
@@ -35,7 +35,10 @@ module.exports = {
         loader: "babel-loader",
         exclude: /node_modules/,
         options: {
-          presets: ["@babel/preset-react", "@babel/preset-typescript"],
+          presets: [
+            ["@babel/preset-react", { runtime: "automatic" }],
+            "@babel/preset-typescript",
+          ],
         },
       },
     ],
@@ -45,13 +48,7 @@ module.exports = {
       name: "interop_app",
       filename: "remoteEntry.js",
       exposes: {
-        './Catalog': './interop-app/src/app/componentCatalog.tsx',
-      },
-      shared: {
-        react: {
-          requiredVersion: deps.react,
-          singleton: true,
-        }
+        "./Catalog": "./interop-app/src/app/componentCatalog.tsx",
       },
     }),
     new HtmlWebpackPlugin({
