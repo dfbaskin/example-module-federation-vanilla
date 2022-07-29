@@ -7,7 +7,11 @@ import './customGreen.css';
 
 const countsSelector = countsSelectorFactory('green');
 
-export function CustomGreen() {
+interface Props {
+  id: string;
+}
+
+export function CustomGreen({id}: Props) {
   const { addComponent, removeComponent, ...counts } =
     useComponentStore(countsSelector);
 
@@ -21,6 +25,7 @@ export function CustomGreen() {
   return (
     <ComponentPanel className='custom-green'>
       <h1>GREEN</h1>
+      <div>{id}</div>
       <div>
         <Counts
           title="GREEN"

@@ -9,7 +9,7 @@ export function registerInteropCustomElement(
   console.log(`Registering ${tagName} component.`);
 
   class ComponentInteropWrapper extends HTMLElement {
-    public static observedAttributes = ['id'];
+    public static observedAttributes = ["id"];
 
     constructor() {
       super();
@@ -20,11 +20,9 @@ export function registerInteropCustomElement(
 
     connectedCallback() {
       console.log(`Mounting ${tagName} component (${this.id}).`);
-      const mountPoint = document.createElement("div");
-      this.appendChild(mountPoint);
       this.deregisterFromActiveInterop = registerActiveInteropComponent(
         <Component />,
-        mountPoint
+        this
       );
     }
 
