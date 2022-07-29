@@ -9,6 +9,8 @@ export function registerInteropCustomElement(
   console.log(`Registering ${tagName} component.`);
 
   class ComponentInteropWrapper extends HTMLElement {
+    public static observedAttributes = ['id'];
+
     constructor() {
       super();
       this.deregisterFromActiveInterop = noop;
@@ -17,7 +19,7 @@ export function registerInteropCustomElement(
     deregisterFromActiveInterop: () => void;
 
     connectedCallback() {
-      console.log(`Mounting ${tagName} component.`);
+      console.log(`Mounting ${tagName} component (${this.id}).`);
       const mountPoint = document.createElement("div");
       this.appendChild(mountPoint);
       this.deregisterFromActiveInterop = registerInteropComponent(
@@ -27,7 +29,7 @@ export function registerInteropCustomElement(
     }
 
     disconnectedCallback() {
-      console.log(`Dismounting ${tagName} component.`);
+      console.log(`Dismounting ${tagName} component (${this.id}).`);
       this.deregisterFromActiveInterop();
       this.deregisterFromActiveInterop = noop;
     }

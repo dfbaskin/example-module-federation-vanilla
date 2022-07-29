@@ -1,5 +1,10 @@
 import "./app.element.css";
 
+const nextComponentId = (function () {
+  let nextId = 0;
+  return () => `components-list-item${++nextId}`;
+})();
+
 export class AppElement extends HTMLElement {
   public static observedAttributes = [];
 
@@ -47,6 +52,7 @@ export class AppElement extends HTMLElement {
     const componentType = (evt.target as HTMLButtonElement | undefined)?.name;
     if (componentType) {
       const component = document.createElement(`custom-${componentType}`);
+      component.id = nextComponentId();
       this.querySelector("#components-list")?.appendChild(component);
     }
   };
