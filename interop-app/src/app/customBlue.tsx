@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import ComponentPanel from './componentPanel';
 import { useComponentStore } from './componentStore';
 import { Counts } from './counts';
 import { countsSelectorFactory } from './countsSelector';
@@ -18,7 +19,7 @@ export function CustomBlue() {
   }, []);
 
   return (
-    <div className="custom-blue">
+    <ComponentPanel className='custom-blue'>
       <h1>BLUE</h1>
       <div>
         <Counts
@@ -32,7 +33,7 @@ export function CustomBlue() {
           removed={counts.removedTotalCount}
         />
       </div>
-    </div>
+    </ComponentPanel>
   );
 }
 

@@ -1,0 +1,10 @@
+.close-button {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+  visibility: collapse;
+}
+
+.close-button.show {
+  visibility: visible;
+}
