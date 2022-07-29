@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["ESNext", "DOM"],
     "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
     "rootDir": "./",
     "moduleResolution": "node",
     "baseUrl": "./",

@@ -1,0 +1,6 @@
+.custom-red {
+  width: auto;
+  min-width: 10rem;
+  min-height: 6rem;
+  background-color: red;
+}

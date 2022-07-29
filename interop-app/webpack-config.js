@@ -4,23 +4,23 @@ const ModuleFederationPlugin =
 const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
-const outputPath = path.join(__dirname, "../dist/host-app");
+const outputPath = path.join(__dirname, "../dist/interop-app");
 
 module.exports = {
-  entry: "./host-app/src/main",
+  entry: "./interop-app/src/main",
   mode: "development",
   devServer: {
     static: {
-      directory: outputPath
+      directory: outputPath,
     },
-    port: 4200,
+    port: 4201,
   },
   output: {
     path: outputPath,
     publicPath: "auto",
   },
   resolve: {
-    extensions: [".ts", ".css"],
+    extensions: [".ts", ".tsx", ".css"],
   },
   module: {
     rules: [
@@ -29,28 +29,27 @@ module.exports = {
         use: ["css-loader"],
       },
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         loader: "babel-loader",
         exclude: /node_modules/,
         options: {
-          presets: ["@babel/preset-typescript"],
+          presets: ["@babel/preset-react", "@babel/preset-typescript"],
         },
       },
     ],
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "host-app",
-      remotes: {
-        app2: "interop-app@http://localhost:4201/remoteEntry.js",
-      },
+      name: "interop-app",
+      filename: "remoteEntry.js",
+      exposes: {},
       shared: ["react", "react-dom"],
     }),
     new HtmlWebpackPlugin({
-      template: "./host-app/src/index.html",
+      template: "./interop-app/src/index.html",
     }),
     new CopyPlugin({
-      patterns: [{ from: "./host-app/src/favicon.ico", to: outputPath }],
+      patterns: [{ from: "./interop-app/src/favicon.ico", to: outputPath }],
     }),
   ],
 };
