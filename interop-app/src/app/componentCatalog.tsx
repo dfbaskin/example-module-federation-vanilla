@@ -1,14 +1,31 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { registerInteropCustomElement } from "./componentInteropWrapper";
 
 const CustomRed = lazy(() => import("./customRed"));
 const CustomBlue = lazy(() => import("./customBlue"));
 const CustomGreen = lazy(() => import("./customGreen"));
 
-function initializer() {
-  registerInteropCustomElement("custom-red", CustomRed);
-  registerInteropCustomElement("custom-blue", CustomBlue);
-  registerInteropCustomElement("custom-green", CustomGreen);
+function ComponentLoader({
+  Component,
+}: {
+  Component: React.ComponentType<unknown>;
+}) {
+  return (
+    <Suspense fallback={<div>...</div>}>
+      <Component />
+    </Suspense>
+  );
 }
 
-export default initializer;
+function registerComponent(
+  tagName: string,
+  Component: React.ComponentType<unknown>
+) {
+  registerInteropCustomElement(tagName, () => (
+    <ComponentLoader Component={Component} />
+  ));
+}
+
+registerComponent("custom-red", CustomRed);
+registerComponent("custom-blue", CustomBlue);
+registerComponent("custom-green", CustomGreen);

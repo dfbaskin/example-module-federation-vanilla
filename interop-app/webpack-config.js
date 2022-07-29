@@ -48,7 +48,7 @@ module.exports = {
       name: "interop_app",
       filename: "remoteEntry.js",
       exposes: {
-        "./Catalog": "./interop-app/src/app/componentCatalog.tsx",
+        ".": "./interop-app/src/main.tsx",
       },
     }),
     new HtmlWebpackPlugin({
