@@ -5,6 +5,10 @@ const CustomRed = lazy(() => import("./customRed"));
 const CustomBlue = lazy(() => import("./customBlue"));
 const CustomGreen = lazy(() => import("./customGreen"));
 
-registerInteropCustomElement('custom-red', CustomRed);
-registerInteropCustomElement('custom-blue', CustomBlue);
-registerInteropCustomElement('custom-green', CustomGreen);
+function initializer() {
+  registerInteropCustomElement("custom-red", CustomRed);
+  registerInteropCustomElement("custom-blue", CustomBlue);
+  registerInteropCustomElement("custom-green", CustomGreen);
+}
+
+export default initializer;

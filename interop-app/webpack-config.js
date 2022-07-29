@@ -42,9 +42,11 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "interop-app",
+      name: "interop_app",
       filename: "remoteEntry.js",
-      exposes: {},
+      exposes: {
+        './Catalog': './interop-app/src/app/componentCatalog.tsx',
+      },
       shared: {
         react: {
           requiredVersion: deps.react,
