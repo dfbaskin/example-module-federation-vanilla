@@ -43,7 +43,10 @@ module.exports = {
       name: "interop-app",
       filename: "remoteEntry.js",
       exposes: {},
-      shared: ["react", "react-dom"],
+      shared: {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+      },
     }),
     new HtmlWebpackPlugin({
       template: "./interop-app/src/index.html",

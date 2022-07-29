@@ -11,7 +11,7 @@ module.exports = {
   mode: "development",
   devServer: {
     static: {
-      directory: outputPath
+      directory: outputPath,
     },
     port: 4200,
   },
@@ -44,7 +44,10 @@ module.exports = {
       remotes: {
         app2: "interop-app@http://localhost:4201/remoteEntry.js",
       },
-      shared: ["react", "react-dom"],
+      shared: {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+      },
     }),
     new HtmlWebpackPlugin({
       template: "./host-app/src/index.html",
