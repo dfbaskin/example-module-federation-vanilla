@@ -7,9 +7,13 @@ export function InteropComponents() {
   return (
     <>
       {activeComponents.map(([key, children, element]) => {
-        const current = Object.fromEntries(
-          Array.from(element.attributes).map(({ name, value }) => [name, value])
+        const props = Array.from(element.attributes).map(
+          ({ name, value }) => [name, value] as [string, unknown]
         );
+        if (element.publishEvent) {
+          props.push(["publishEvent", element.publishEvent]);
+        }
+        const current = Object.fromEntries(props);
         return createPortal(
           <CustomElementRootPropsProvider current={current}>
             {children}

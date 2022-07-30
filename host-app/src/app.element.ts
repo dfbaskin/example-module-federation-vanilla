@@ -32,9 +32,11 @@ export class AppElement extends HTMLElement {
       `;
 
     this.addButtons.addEventListener("click", this.addElement);
+    this.componentsList.addEventListener("panelClosed", this.closePanel);
   }
 
   disconnectedCallback() {
+    this.componentsList.removEventListener("panelClosed", this.closePanel);
     this.addButtons.removeEventListener("click", this.addElement);
   }
 
@@ -48,12 +50,26 @@ export class AppElement extends HTMLElement {
     return this.querySelector("#add-buttons") as HTMLDivElement;
   }
 
+  get componentsList() {
+    return this.querySelector("#components-list") as HTMLDivElement;
+  }
+
   addElement = (evt: MouseEvent) => {
     const componentType = (evt.target as HTMLButtonElement | undefined)?.name;
     if (componentType) {
       const component = document.createElement(`custom-${componentType}`);
       component.id = nextComponentId();
-      this.querySelector("#components-list")?.appendChild(component);
+      this.componentsList.appendChild(component);
+    }
+  };
+
+  closePanel = (evt: CustomEvent) => {
+    const panelId = evt.detail.panelId;
+    if (panelId) {
+      const element = document.querySelector(`#${panelId}`);
+      if (element) {
+        element.remove();
+      }
     }
   };
 }

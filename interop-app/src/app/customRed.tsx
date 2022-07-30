@@ -1,29 +1,39 @@
-import { useEffect } from 'react';
-import { ComponentPanel } from './componentPanel';
-import { useComponentStore } from './componentStore';
-import { Counts } from './counts';
-import { countsSelectorFactory } from './countsSelector';
-import './customRed.css';
+import { useEffect } from "react";
+import { ComponentPanel } from "./componentPanel";
+import { useComponentStore } from "./componentStore";
+import { Counts } from "./counts";
+import { countsSelectorFactory } from "./countsSelector";
+import "./customRed.css";
 
-const countsSelector = countsSelectorFactory('red');
+const countsSelector = countsSelectorFactory("red");
 
 interface Props {
   id: string;
+  publishEvent: (event: Event) => boolean;
 }
 
-export function CustomRed({id}: Props) {
+export function CustomRed({ id, publishEvent }: Props) {
   const { addComponent, removeComponent, ...counts } =
     useComponentStore(countsSelector);
 
   useEffect(() => {
-    addComponent('red');
+    addComponent("red");
     return () => {
-      removeComponent('red');
+      removeComponent("red");
     };
   }, []);
 
+  const onClosePanel = () => {
+    publishEvent(
+      new CustomEvent("panelClosed", {
+        bubbles: true,
+        detail: { panelId: id },
+      })
+    );
+  };
+
   return (
-    <ComponentPanel className='custom-red'>
+    <ComponentPanel className="custom-red" onClosePanel={onClosePanel}>
       <h1>RED</h1>
       <div>{id}</div>
       <div>

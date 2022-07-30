@@ -18,6 +18,10 @@ export function registerInteropCustomElement(
 
     deregisterFromActiveInterop: () => void;
 
+    publishEvent = (event: Event) => {
+      return this.dispatchEvent(event);
+    };
+
     connectedCallback() {
       console.log(`Mounting ${tagName} component (${this.id}).`);
       this.deregisterFromActiveInterop = registerActiveInteropComponent(
@@ -28,8 +32,14 @@ export function registerInteropCustomElement(
 
     disconnectedCallback() {
       console.log(`Dismounting ${tagName} component (${this.id}).`);
-      this.deregisterFromActiveInterop();
-      this.deregisterFromActiveInterop = noop;
+    }
+
+    remove() {
+      if(this.deregisterFromActiveInterop !== noop) {
+        this.deregisterFromActiveInterop();
+        this.deregisterFromActiveInterop = noop;
+        super.remove();
+      }
     }
   }
 

@@ -25,8 +25,13 @@ export function registerActiveInteropComponent(
   updateSubject.next(true);
   return () => {
     activeComponents.delete(key);
+    updateSubject.next(true);
   };
 }
+
+type InteropHTMLElement = {
+  publishEvent?: (event: Event) => boolean;
+} & HTMLElement;
 
 export function useActiveInteropComponents() {
   const [counter, forceUpdate] = useReducer((x) => x + 1, 0);
@@ -45,7 +50,7 @@ export function useActiveInteropComponents() {
 
   const components = useMemo(() => {
     return [...activeComponents].map(([key, value]) => {
-      return [key, ...value] as [string, React.ReactNode, HTMLElement];
+      return [key, ...value] as [string, React.ReactNode, InteropHTMLElement];
     });
   }, [counter]);
 
