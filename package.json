@@ -31,6 +31,9 @@
     "build-dev": "npm-run-all build-dev:*",
     "build-dev:host": "webpack --config host-app/webpack-config.js",
     "build-dev:interop": "webpack --config interop-app/webpack-config.js",
+    "check": "npm-run-all check:*",
+    "check:host": "tsc --noEmit --project host-app",
+    "check:interop": "tsc --noEmit --project interop-app",
     "format": "prettier --write ."
   },
   "dependencies": {

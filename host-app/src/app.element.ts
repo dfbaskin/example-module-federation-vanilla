@@ -5,6 +5,25 @@ const nextComponentId = (function () {
   return () => `components-list-item${++nextId}`;
 })();
 
+interface ClosePanelEventDetails {
+  panelId: string;
+}
+interface CustomEventMap {
+  panelClosed: CustomEvent<ClosePanelEventDetails>;
+}
+declare global {
+  interface HTMLDivElement {
+    addEventListener<K extends keyof CustomEventMap>(
+      type: K,
+      listener: (this: Document, ev: CustomEventMap[K]) => void
+    ): void;
+    removeEventListener<K extends keyof CustomEventMap>(
+      type: K,
+      listener: (this: Document, ev: CustomEventMap[K]) => void
+    ): void;
+  }
+}
+
 export class AppElement extends HTMLElement {
   public static observedAttributes = [];
 
@@ -36,7 +55,7 @@ export class AppElement extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.componentsList.removEventListener("panelClosed", this.closePanel);
+    this.componentsList.removeEventListener("panelClosed", this.closePanel);
     this.addButtons.removeEventListener("click", this.addElement);
   }
 
@@ -63,7 +82,7 @@ export class AppElement extends HTMLElement {
     }
   };
 
-  closePanel = (evt: CustomEvent) => {
+  closePanel = (evt: CustomEvent<ClosePanelEventDetails>) => {
     const panelId = evt.detail.panelId;
     if (panelId) {
       const element = document.querySelector(`#${panelId}`);
