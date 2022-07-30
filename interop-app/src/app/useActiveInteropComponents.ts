@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useReducer } from 'react';
-import { Subject, tap } from 'rxjs';
+import { useEffect, useMemo, useReducer } from "react";
+import { Subject, tap } from "rxjs";
 
 type ActiveInteropComponentEntry = [React.ReactNode, HTMLElement];
 

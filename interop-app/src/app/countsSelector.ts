@@ -1,4 +1,4 @@
-import { ComponentStoreState } from './componentStore';
+import { ComponentStoreState } from "./componentStore";
 
 export const countsSelectorFactory = (componentType: string) => {
   return (state: ComponentStoreState) => {

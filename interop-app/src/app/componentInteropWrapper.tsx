@@ -35,7 +35,7 @@ export function registerInteropCustomElement(
     }
 
     remove() {
-      if(this.deregisterFromActiveInterop !== noop) {
+      if (this.deregisterFromActiveInterop !== noop) {
         this.deregisterFromActiveInterop();
         this.deregisterFromActiveInterop = noop;
         super.remove();

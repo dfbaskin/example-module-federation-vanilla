@@ -1,2 +1,1 @@
-declare module 'interop_app' {
-}
+declare module "interop_app" {}

@@ -30,7 +30,8 @@
     "build:interop": "webpack --mode production --config interop-app/webpack-config.js",
     "build-dev": "npm-run-all build-dev:*",
     "build-dev:host": "webpack --config host-app/webpack-config.js",
-    "build-dev:interop": "webpack --config interop-app/webpack-config.js"
+    "build-dev:interop": "webpack --config interop-app/webpack-config.js",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "immer": "^9.0.15",

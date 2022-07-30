@@ -1,6 +1,6 @@
-import createStore from 'zustand/vanilla';
-import createHook from 'zustand';
-import produce from 'immer';
+import createStore from "zustand/vanilla";
+import createHook from "zustand";
+import produce from "immer";
 
 interface Counts {
   added: number;
