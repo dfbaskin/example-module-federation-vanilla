@@ -16,7 +16,7 @@ export class AppElement extends HTMLElement {
     const title = "webapp";
     this.innerHTML = `
     <div class="app-root">
-      <h1>Web Application / React Port Interop Example</h1>
+      <h1>Web Application / React Portal Interop Example</h1>
       <div>
         <fieldset>
           <legend>Add Components</legend>
