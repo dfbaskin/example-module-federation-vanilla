@@ -2,9 +2,9 @@ import { lazy } from "react";
 import { registerInteropCustomElement } from "./componentInteropWrapper";
 import { InteropComponent } from "./interopComponent";
 
-const CustomRed = lazy(() => import("./customRed"));
-const CustomBlue = lazy(() => import("./customBlue"));
-const CustomGreen = lazy(() => import("./customGreen"));
+const CustomRed = lazy(() => import("./customRed")) as React.ComponentType<unknown>;
+const CustomBlue = lazy(() => import("./customBlue")) as React.ComponentType<unknown>;
+const CustomGreen = lazy(() => import("./customGreen")) as React.ComponentType<unknown>;
 
 registerInteropCustomElement("custom-red", () => (
   <InteropComponent Component={CustomRed} />
